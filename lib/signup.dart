@@ -41,7 +41,7 @@ class _SignupState extends State<Signup> {
           const SizedBox(height: 20),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 146,
+            height: 250,
             decoration: const BoxDecoration(
                 color:Color.fromARGB(255, 238, 237, 237),
                 borderRadius: BorderRadius.only(
@@ -60,7 +60,23 @@ class _SignupState extends State<Signup> {
                 Icon(
                   Icons.fingerprint,
                   size: 60,
-                  color: Colors.grey,)
+                  color: Colors.grey,),
+                Padding(
+                padding:EdgeInsets.only(top: 50),
+                child : GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/signin");
+                  },
+                  child: Text(
+                    "Sign in",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black, // Set the link color
+                    ),
+                  ),
+                )
+                )
+              
               ],
             ),
           )

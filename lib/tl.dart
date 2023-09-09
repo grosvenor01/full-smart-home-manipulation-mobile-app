@@ -11,6 +11,8 @@ class templigh extends StatefulWidget {
 
 class _templighState extends State<templigh> {
   var isToggled = false;
+  int selectedContainerIndex = 0;
+  List<String> labels = ["Room", "Kitchen", "Bathroom", "Hallway"];
   List<bool> toggle = [false, false, true, false];
   @override
   Widget build(BuildContext context) {
@@ -19,69 +21,52 @@ class _templighState extends State<templigh> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 372,
-          height: 45,
-          margin: EdgeInsets.only(top: 30, left: 9, right: 9, bottom: 19),
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 204, 204, 204),
-              borderRadius: BorderRadius.circular(10)),
-          child: Row(
-            children: [
-              Container(
-                  width: 69,
-                  height: 36,
-                  margin: EdgeInsets.only(left: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(top: 6, bottom: 7, left: 10, right: 14),
-                    child: DefaultTextStyle(
-                      style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                          color: Colors.black),
-                      child: const Text("Room"),
+            width: 372,
+            height: 45,
+            margin: EdgeInsets.only(top: 30, left: 9, right: 9, bottom: 19),
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 204, 204, 204),
+                borderRadius: BorderRadius.circular(10)),
+            child: Row(
+              children: [
+                
+                for (int index = 0; index < 4; index++)
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedContainerIndex = index;
+                      });
+                    },
+                    child: Container(
+                      width: 83,
+                      height: 36,
+                      margin: EdgeInsets.only(left: 4),
+                      decoration: BoxDecoration(
+                        color: selectedContainerIndex == index
+                            ? Colors.white
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 6, bottom: 7, left: 10, right: 14),
+                        child: Center(child:DefaultTextStyle(
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                              color: selectedContainerIndex == index
+                                  ? Colors.black
+                                  : Colors
+                                      .black), // You can customize the text style here
+                          child: Text(labels[index]),
+                        ),
+                        )
+                      ),
                     ),
-                  )),
-              SizedBox(
-                width: 34,
-              ),
-              DefaultTextStyle(
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    color: Colors.black),
-                child: const Text("Kitchen"),
-              ),
-              SizedBox(
-                width: 34,
-              ),
-              DefaultTextStyle(
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    color: Colors.black),
-                child: const Text("Bathroom"),
-              ),
-              SizedBox(
-                width: 34,
-              ),
-              DefaultTextStyle(
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    color: Colors.black),
-                child: const Text("Hallway"),
-              ),
-              SizedBox(
-                width: 13,
-              ),
-            ],
-          ),
-        ),
+                  ),
+                SizedBox(width:13),
+              ],
+            )),
         Padding(
           padding: EdgeInsets.only(top: 19, left: 13),
           child: DefaultTextStyle(
@@ -453,7 +438,7 @@ class _templighState extends State<templigh> {
                               value: toggle[1],
                               onToggle: (value) {
                                 setState(() {
-                                 toggle[1] = value;
+                                  toggle[1] = value;
                                 });
                               }),
                         ],
